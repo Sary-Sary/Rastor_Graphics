@@ -2,7 +2,7 @@
 #include <string>
 #include <iostream>
 
-const std::string main_commands[] = { "grayscale", "monochrome", "negative", "rotate", };
+const std::string main_commands[] = { "grayscale", "monochrome", "negative", "rotate" };
 const std::string addons_to_main_command[] = { "left", "right"};
 const int amount_of_commands = 4;
 const int amount_of_addon_commands = 2;

@@ -74,7 +74,7 @@ File* read_binary_pbm(std::fstream& file) {
     for (int i = 0; i < size; i++) {
 
         if (line[i] == '0') pbm_file.push_back(0);
-        if (line[i] == '1') pbm_file.push_back(1);
+        else if (line[i] == '1') pbm_file.push_back(1);
 
     }
 

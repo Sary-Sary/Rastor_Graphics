@@ -11,6 +11,7 @@ protected:
 
 public:
 
+	File(int width, int height) : width (width), height(height) {}
 	virtual void grayscale() = 0;
 	virtual void monochrome() = 0;
 	virtual void negative() = 0;

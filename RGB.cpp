@@ -2,13 +2,17 @@
 
 RGB::RGB() {
 
-
+	red = 255;
+	green = 255;
+	blue = 255;
 
 }
 
 RGB::RGB(unsigned red_, unsigned green_, unsigned blue_, unsigned max_value_) {
 
-
+	red = red_*255/max_value_;
+	green = green_ * 255 / max_value_;
+	blue = blue_ * 255 / max_value_;
 
 }
 
