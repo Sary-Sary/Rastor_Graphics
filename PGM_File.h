@@ -2,7 +2,7 @@
 #include "Greyscale.h"
 #include "File.h"
 
-class PGM_File : protected File {
+class PGM_File : public File {
 
 	std::vector <Greyscale> file;
 	int max_value;
