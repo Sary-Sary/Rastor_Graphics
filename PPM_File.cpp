@@ -1,6 +1,6 @@
 #include "PPM_File.h"
 
-PPM_File::PPM_File(int width, int height, std::vector <RGB> file) : File(width, height), file(file) {}
+PPM_File::PPM_File(int width, int height, std::vector <RGB> file, int max_value) : File(width, height), file(file), max_value(max_value) {}
 
 void PPM_File::grayscale() {
 
@@ -37,3 +37,5 @@ void PPM_File::rotate(std::string direction) {
 
 
 }
+ 
+std::string PPM_File::get_file_extension() { return ".ppm"; }

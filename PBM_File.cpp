@@ -32,8 +32,10 @@ void PBM_File::rotate(std::string direction) {
 	//		    1 4        3 6
 	//1 2 3 4 5 6 -> 3 6 2 5 1 4 || 4 1 5 2 3 6
 
-	std::swap(width, height);
+	//std::swap(width, height);
 
 
 
 }
+
+std::string PBM_File::get_file_extension() { return ".pbm"; }

@@ -8,65 +8,123 @@
 #include "PGM_File.h"
 #include <string>
 
-const std::string all_commands[] = {"open", "close", "save", "save as", "help", "grayscale", "monochrome", "negative", "rotate", "undo", "add", "session", "switch", "collage"};
-const int amount_of_all_commands = 14;
-
 class Session
 {
 	int session_number;
-	File* files_in_session;
+	std::vector<File*> files_in_session;
 	Command_Queue photo_commands;
+	std::vector<std::string> file_name;
+	bool has_saved_since_last_edit;
 
 public:
 
 	Command make_photo_command(std::string command) {
 
-		std::stringstream stream(command);
+		has_saved_since_last_edit = false;
 
-		std::string main_command;
-		std::string addon_command;
-
-		stream >> main_command >> addon_command;
-
-		if (addon_command.empty()) return Command(main_command);
-		return Command(main_command, addon_command);
+		photo_commands.enqueue(Command(command));
 
 	}
 
-	bool valid_command(std::string command) {
+	void add_file(File* file) {
 
-		for (int i = 0; i < amount_of_all_commands; i++) {
+		files_in_session.push_back(file);
+		return;
+	}
 
-			if (command == all_commands[i]) return true;
+	void add_file_name(std::string file_name) {
+
+		file_name = file_name;
+
+	}
+
+	void open_file(File* file, std::string file_name) {
+
+		add_file(file);
+		add_file_name(file_name);
+
+	}
+
+	void close_file() {
+
+		session_number = 0;
+		files_in_session.clear();
+		photo_commands.clear();
+		file_name.clear();
+		has_saved_since_last_edit = true;
+
+	}
+
+	void save() {
+
+		has_saved_since_last_edit = true;
+
+	}
+
+	void save_as(std::string new_file_name) {
+
+		file_name.push_back(new_file_name);
+		has_saved_since_last_edit = true;
+
+	}
+
+	void grayscale() {
+
+		make_photo_command("greyscale");
+
+	}
+
+	void monochrome() {
+
+		make_photo_command("monochrome");
+
+	}
+
+	void negative() {
+
+		make_photo_command("negative");
+
+	}
+
+	void rotate() {
+
+		make_photo_command("rotate");
+
+	}
+
+	void undo() {
+
+		photo_commands.dequeue();
+
+	}
+
+	int get_session_number() { return session_number; }
+
+	void save_files(Command command) {
+
+		for (int i = 0; i < files_in_session.size(); i++) {
+
+			if (Command(command) == Command("grayscale")) files_in_session[i]->grayscale();
+			else if (Command(command) == Command("monochrome")) files_in_session[i]->monochrome();
+			else if (Command(command) == Command("negative")) files_in_session[i]->negative();
+			else if (Command(command) == Command("rotate")) files_in_session[i]->rotate(command.additional_command);
 
 		}
-		
-		std::cout << "Invalid command\n";
-
-		return false;
 
 	}
 
-	void make_new_command() {
+	void save_all() {
 
-		std::string command;
-		std::getline(std::cin, command);
+		while (!photo_commands.empty()) {
 
-		std::stringstream stream(command);
+			save_files(photo_commands.front());
+			photo_commands.dequeue();
 
-		std::string main_command;
-		std::string addon_command;
+		}
 
-		stream >> main_command >> addon_command;
-
-	}
-
-	void session() {
-
-
+		return;
 
 	}
-
 
 };
 

@@ -1,14 +1,15 @@
 #pragma once
 #include "Command_Node.h"
 
+//Implemented from https://github.com/ivanahristova/data-structures-fmi/blob/main/sem04/linked-queue.cpp
+
 class Command_Queue
 {
 
     Command_Node* head;
     Command_Node* tail;
 
-    void copy(const Command_Queue& other);
-    void free();
+    void copy(const Command_Queue& other);    
 	
 public:
 
@@ -22,6 +23,8 @@ public:
 
     Command front();
     bool empty();
+
+    void clear();
 
 };
 

@@ -16,6 +16,7 @@ public:
 	virtual void monochrome() = 0;
 	virtual void negative() = 0;
 	virtual void rotate(std::string direction) = 0;
+	virtual std::string get_file_extension() = 0;
 
 };
 

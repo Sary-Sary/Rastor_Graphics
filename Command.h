@@ -9,10 +9,12 @@ const int amount_of_addon_commands = 2;
 
 class Command{
 
+public:
+
 	std::string command;
 	std::string additional_command;
 
-public:
+
 
 	Command();
 	Command(std::string command);
@@ -20,6 +22,8 @@ public:
 
 	bool is_valid_command(std::string command);
 	bool is_valid_command(std::string command, std::string addon_command);
+
+	bool operator==(const Command& other) { return command == other.command; }
 
 };
 

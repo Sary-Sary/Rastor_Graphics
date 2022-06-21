@@ -14,6 +14,6 @@ public:
 	void monochrome();
 	void negative();
 	void rotate(std::string direction);
-
+	std::string get_file_extension();
 };
 
